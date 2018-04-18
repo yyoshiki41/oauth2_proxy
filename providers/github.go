@@ -256,17 +256,25 @@ func (p *GitHubProvider) GetEmailAddress(s *SessionState) (string, error) {
 	}
 
 	// if we require an Org or Team, check that first
+	verifiedOrgOrTeam := false
 	if p.Org != "" {
+		var err error
 		if p.Team != "" {
-			if ok, err := p.hasOrgAndTeam(s.AccessToken); err != nil || !ok {
+			verifiedOrgOrTeam, err = p.hasOrgAndTeam(s.AccessToken)
+			if err != nil {
 				return "", err
 			}
 		} else {
-			if ok, err := p.hasOrg(s.AccessToken); err != nil || !ok {
+			verifiedOrgOrTeam, err = p.hasOrg(s.AccessToken)
+			if err != nil {
 				return "", err
 			}
 		}
-	} else if p.User != "" {
+	}
+	if !verifiedOrgOrTeam {
+		if p.User == "" {
+			return "", nil
+		}
 		if ok, err := p.hasUser(s.AccessToken); err != nil || !ok {
 			return "", err
 		}
