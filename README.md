@@ -104,6 +104,7 @@ The GitHub auth provider supports two additional parameters to restrict authenti
 
     -github-org="": restrict logins to members of this organisation
     -github-team="": restrict logins to members of any of these teams (slug), separated by a comma
+    -github-user="": restrict logins to any of these users, separated by a comma
 
 If you are using GitHub enterprise, make sure you set the following to the appropriate url:
 
@@ -193,6 +194,7 @@ Usage of oauth2_proxy:
   -footer string: custom footer string. Use "-" to disable default footer.
   -github-org string: restrict logins to members of this organisation
   -github-team string: restrict logins to members of any of these teams (slug), separated by a comma
+  -github-user string: restrict logins to any of these users, separated by a comma
   -google-admin-email string: the google admin to impersonate for api calls
   -google-group value: restrict logins to members of this google group (may be given multiple times).
   -google-service-account-json string: the path to the service account json credentials
